@@ -1,0 +1,112 @@
+@font-face {
+    font-family: 'Meticula';
+    src: url('../html/font/MeticulaExtraBold.ttf') format('truetype');
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+    width: 100%;
+}
+
+.killfeed-container {
+    position: fixed;
+    right: 10px;
+    top: 50%; 
+    right: 10px; 
+    max-width: 300px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.killfeed-entry {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 237px;
+    height: 39px;
+    background: rgba(29, 29, 29, 0.76);
+    border-radius: 5px;
+    transform: translateX(150%);
+    opacity: 0;
+    animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        transform: translateX(150%);
+        opacity: 0;
+    }
+}
+
+.killfeed-entry.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+.name-container {
+    position: absolute;
+    width: 90px;
+    height: 27px;
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.76) 0%, rgba(153, 0, 0, 0.76) 69.5%);
+    border-radius: 5px;
+    top: 6px;
+    left: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.killer-name {
+    font-family: 'Meticula', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: #FFFFFF;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    text-align: center;
+}
+
+.victim-name {
+    position: absolute;
+    width: 63px;
+    font-family: 'Meticula', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: #FFFFFF;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.icons {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 105px;
+}
+
+.target-icon {
+    width: 16px;
+    height: 16px;
+}
