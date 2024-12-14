@@ -1,6 +1,6 @@
 # Killfeed System for FiveM
 
-This is a lightweight and optimized script for FiveM that displays a customizable killfeed. It allows server owners to provide players with real-time, dynamic kill notifications for PvP or PvE events.
+This is a lightweight and optimized script for FiveM that displays a customizable killfeed. It allows server owners to provide players with real-time, dynamic kill notifications for PvP events.
 
 # Requirements!
 
