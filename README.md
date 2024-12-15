@@ -10,7 +10,7 @@ This is a lightweight and optimized script for FiveM that displays a customizabl
 - Displays a real-time killfeed for player kills
 - Fully customizable, allowing you to change visuals, messages, and triggers
 - Optimized for performance to minimize server resource usage
-- Easy to install and configure, designed to integrate seamlessly with ESX
+- Easy to install and configure, designed to integrate seamlessly with any framework
 
 # Installation
 1. Clone or download the repository.
