@@ -10,25 +10,21 @@ RegisterNetEvent('killfeed:clear', function()
     SendNUIMessage({ type = 'clearKillfeed' })
 end)
 
--- Track player death state
-CreateThread(function()
-    local isDead = false
+-- Handle player death via game event
+AddEventHandler('gameEventTriggered', function(event, data)
+    if event == "CEventNetworkEntityDamage" then
+        local victim = data[1]
+        local killer = data[2]
 
-    while true do
-        Wait(500)
+        -- Check if the victim is the local player and if they're dead
+        if NetworkGetPlayerIndexFromPed(victim) == PlayerId() and IsEntityDead(victim) then
+            local killerId = -1
+            local killerName = "Unknown"
 
-        local playerPed = PlayerPedId()
-        local currentlyDead = IsEntityDead(playerPed)
-
-        if currentlyDead and not isDead then
-            isDead = true
-
-            local killerPed = GetPedSourceOfDeath(playerPed)
-            local killerId, killerName = -1, "Unknown"
-
-            if killerPed and killerPed ~= playerPed then
-                if IsPedAPlayer(killerPed) then
-                    local killerPlayerId = NetworkGetPlayerIndexFromPed(killerPed)
+            -- Determine killer information
+            if DoesEntityExist(killer) and killer ~= victim then
+                if IsPedAPlayer(killer) then
+                    local killerPlayerId = NetworkGetPlayerIndexFromPed(killer)
                     if killerPlayerId and killerPlayerId ~= -1 then
                         killerId = GetPlayerServerId(killerPlayerId)
                         killerName = GetPlayerName(killerPlayerId)
@@ -40,10 +36,8 @@ CreateThread(function()
                 killerName = "Self-inflicted"
             end
 
+            -- Notify the server about the player's death
             TriggerServerEvent('killfeed:playerDied', killerId)
-
-        elseif not currentlyDead and isDead then
-            isDead = false
         end
     end
 end)
