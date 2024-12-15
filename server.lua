@@ -1,16 +1,22 @@
-RegisterServerEvent('esx:onPlayerDeath')
-AddEventHandler('esx:onPlayerDeath', function(data)
-    local victimId = source
-    local victimName = GetPlayerName(victimId)
+local function handlePlayerDeath(victimId, killerId)
+    local victimName = GetPlayerName(victimId) or "Unknown"
+    local killerName = "Environment"
 
-    if data.killedByPlayer then
-        local killerId = data.killerServerId
-        local killerName = GetPlayerName(killerId)
-
-        -- Send the killfeed update only to the killer and victim
-        TriggerClientEvent('killfeed:display', killerId, killerName, victimName)
-        TriggerClientEvent('killfeed:display', victimId, killerName, victimName)
-    else
-        TriggerClientEvent('killfeed:display', victimId, nil, victimName)
+    if killerId and killerId > 0 then
+        killerName = GetPlayerName(killerId) or "Unknown"
+    elseif killerId == -1 then
+        killerName = "Environment"
     end
+
+    TriggerClientEvent('killfeed:display', victimId, killerName, victimName)
+
+    if killerId and killerId > 0 then
+        TriggerClientEvent('killfeed:display', killerId, killerName, victimName)
+    end
+end
+
+RegisterServerEvent('killfeed:playerDied', function(killerId)
+    local victimId = source
+    if not victimId then return end
+    handlePlayerDeath(victimId, killerId)
 end)
