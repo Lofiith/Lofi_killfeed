@@ -12,6 +12,7 @@ This is a lightweight, optimized script for FiveM that introduces a highly confi
 - Automatically rewards players for kills
 - Optimized for performance to minimize server resource usage
 - Easy to install and configure, designed to integrate seamlessly with any framework
+- works with Ox_inventory!
 
 # Installation
 1. Clone or download the repository.
